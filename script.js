@@ -108,18 +108,42 @@ console.log(book);
 
 // apply method bu method call method ga o'xshash farqi bu array qabul qiladi argumentiga
 
-const app={
-  name:'Red apply',
-  idCode:'RA',
-  booking:[]
-}
+const app = {
+  name: 'Red apply',
+  idCode: 'RA',
+  booking: [],
+};
 // apply
-const arr=["jamshid",4]
-newBook.apply(app,arr)
-console.log(app)
+const arr = ['jamshid', 4];
+newBook.apply(app, arr);
+console.log(app);
 // call
-newBook.call(app,'jamshid',4) // ...arr
-console.log(app)
+newBook.call(app, 'jamshid', 4); // ...arr
+console.log(app);
 // both is the same result
 
+/////////////////////////////////// bind method /////////////////////////
+console.log('------------------------------------------------------------')
+const a = {
+  name: 'Apply',
+  idCode: 'SD',
+  booking:[],
+  book(person, id) {
+    this.booking.push(this.idCode + id);
+    return `${person} is reading a ${this.name}. This book's id is ${
+      this.idCode + id
+    } !`;
+  },
+};
+const b = {
+  name: 'Temur',
+  idCode: 'KN',
+  booking:[]
+};
 
+a.book.call(b,'John', 23);
+console.log(b)
+
+const newFunc=a.book.bind(b,'Jon',45)
+console.log(b)
+console.log(newFunc())
