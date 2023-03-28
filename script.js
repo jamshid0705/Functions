@@ -123,11 +123,11 @@ console.log(app);
 // both is the same result
 
 /////////////////////////////////// bind method /////////////////////////
-console.log('------------------------------------------------------------')
+console.log('------------------------------------------------------------');
 const a = {
   name: 'Apply',
   idCode: 'SD',
-  booking:[],
+  booking: [],
   book(person, id) {
     this.booking.push(this.idCode + id);
     return `${person} is reading a ${this.name}. This book's id is ${
@@ -138,12 +138,33 @@ const a = {
 const b = {
   name: 'Temur',
   idCode: 'KN',
-  booking:[]
+  booking: [],
 };
 
-a.book.call(b,'John', 23);
-console.log(b)
+const book1 = a.book;
+const newFunc = book1.call(b, 'Ali', 45);
+console.log(newFunc);
+console.log(b);
 
-const newFunc=a.book.bind(b,'Jon',45)
-console.log(b)
-console.log(newFunc())
+const newFunc1 = book1.bind(b);
+newFunc1('sabr', 89);
+newFunc1('jim', 567);
+newFunc1('Tom', 56);
+console.log(b);
+
+// with Event Listeners
+a.planes = 200;
+a.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+// const bindFunc = a.buyPlane.bind(a);
+// console.log(a.buyPlane.bind(a));
+// console.log(a.buyPlane())
+document.querySelector('.buy').addEventListener('click', a.buyPlane.bind(a));
+
+const addTax=(number,value)=>number+value
+const newAdd=addTax.bind()
+console.log(newAdd(45,56))
+console.log(newAdd(90,8))
